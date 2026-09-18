@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Plavra - um jogo diário de palavras de cinco letras.">
-    <title>Plavra</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="description" content="Senha - um jogo diário de palavras de cinco letras.">
+    <title>Senha</title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
     <main class="game">
         <header class="header">
-            <h1>PLAVRA</h1>
+            <h1>SENHA</h1>
             <button id="helpButton" class="icon-button" type="button" aria-label="Como jogar">?</button>
         </header>
 
@@ -25,6 +25,7 @@
                 <strong id="resultTitle">Você venceu!</strong>
                 <span id="answer"></span>
             </div>
+
             <div class="next-game">
                 <span>Próximo jogo</span>
                 <strong id="countdown">00:00:00</strong>
@@ -32,19 +33,37 @@
         </section>
     </main>
 
-    <div id="helpModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
+    <div
+        id="helpModal"
+        class="modal hidden"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="helpTitle"
+    >
         <div class="modal-content">
-            <button id="closeHelpButton" class="close-button" type="button" aria-label="Fechar">×</button>
+            <button
+                id="closeHelpButton"
+                class="close-button"
+                type="button"
+                aria-label="Fechar"
+            >
+                ×
+            </button>
+
             <h2 id="helpTitle">Como jogar</h2>
+
             <p>Adivinhe a palavra de 5 letras em até 6 tentativas.</p>
+
             <div class="example">
                 <div class="example-tile correct">P</div>
                 <p>A letra está na posição correta.</p>
             </div>
+
             <div class="example">
                 <div class="example-tile present">L</div>
                 <p>A letra existe, mas está em outra posição.</p>
             </div>
+
             <div class="example">
                 <div class="example-tile absent">X</div>
                 <p>A letra não está na palavra.</p>
@@ -52,7 +71,7 @@
         </div>
     </div>
 
-    <script src="words.js"></script>
-    <script src="script.js"></script>
+    <script src="./js/game.js"></script>
 </body>
 </html>
+```

@@ -297,3 +297,11 @@ button {
         gap: 4px;
     }
 }
+
+.reset-button {
+    margin-top: 16px;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}

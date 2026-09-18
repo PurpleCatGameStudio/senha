@@ -26,6 +26,7 @@ const boardElement = document.getElementById("board");
 const keyboardElement = document.getElementById("keyboard");
 const messageElement = document.getElementById("message");
 const statsElement = document.getElementById("stats");
+const resetButtonElement = document.getElementById("resetButton");
 const resultTitleElement = document.getElementById("resultTitle");
 const answerElement = document.getElementById("answer");
 const countdownElement = document.getElementById("countdown");
@@ -366,6 +367,20 @@ function showStats(won) {
     answerElement.textContent = gameState.target;
 }
 
+function resetGame() {
+    gameState.guesses = [];
+    gameState.currentGuess = "";
+    gameState.gameOver = false;
+    gameState.evaluations = [];
+
+    localStorage.removeItem(CONFIG.storageKey);
+
+    renderBoard();
+    updateKeyboard();
+    statsElement.classList.add("hidden");
+    showMessage("");
+}
+
 function updateCountdown() {
     if (!gameState.gameOver) {
         statsElement.classList.add("hidden");
@@ -451,6 +466,8 @@ document.addEventListener("keydown", handlePhysicalKeyboard);
 helpButtonElement.addEventListener("click", openHelp);
 
 closeHelpButtonElement.addEventListener("click", closeHelp);
+
+resetButtonElement.addEventListener("click", resetGame);
 
 helpModalElement.addEventListener("click", event => {
     if (event.target === helpModalElement) {

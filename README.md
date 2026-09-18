@@ -1,6 +1,6 @@
-# Plavra
+# Senha
 
-Jogo diário de palavras de 5 letras feito com HTML, CSS e JavaScript puro.
+Jogo diário de palavras onde você deve descobrir a senha. feito com HTML, CSS e JavaScript puro.
 
 ## Rodando localmente
 

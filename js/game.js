@@ -106,12 +106,33 @@ function getDailyWord(dayOffset = 0) {
 }
 
 function devResetDay() {
-    const devDayOffset = Number(localStorage.getItem("senha-dev-day-offset") || 0) + 1;
+    const currentWord = gameState.target;
+    const currentIndex = WORDS.indexOf(currentWord);
 
-    localStorage.setItem("senha-dev-day-offset", devDayOffset);
-    localStorage.removeItem(CONFIG.storageKey);
+    if (currentIndex === -1) {
+        return;
+    }
 
-    window.location.reload();
+    let index = (currentIndex + 1) % WORDS.length;
+
+    while (
+        WORDS[index] === currentWord ||
+        WORDS[index][0] === currentWord[0]
+    ) {
+        index = (index + 1) % WORDS.length;
+    }
+
+    gameState.target = WORDS[index];
+    gameState.guesses = [];
+    gameState.currentGuess = "";
+    gameState.gameOver = false;
+    gameState.evaluations = [];
+
+    saveState();
+    renderBoard();
+    updateKeyboard();
+    statsElement.classList.add("hidden");
+    showMessage("");
 }
 
 function loadState() {
@@ -121,8 +142,7 @@ function loadState() {
         const saved = JSON.parse(localStorage.getItem(CONFIG.storageKey));
 
         if (!saved || saved.day !== todayKey) {
-            const devDayOffset = Number(localStorage.getItem("senha-dev-day-offset") || 0);
-            gameState.target = getDailyWord(devDayOffset);
+            gameState.target = getDailyWord();
             gameState.guesses = [];
             gameState.currentGuess = "";
             gameState.gameOver = false;
@@ -407,11 +427,6 @@ function resetGame() {
     updateKeyboard();
     statsElement.classList.add("hidden");
     showMessage("");
-}
-
-function devResetDay() {
-    localStorage.removeItem(CONFIG.storageKey);
-    window.location.reload();
 }
 
 function updateCountdown() {

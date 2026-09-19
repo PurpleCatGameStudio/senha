@@ -36,8 +36,6 @@ const refs = {
     countdownWrapperElement: document.getElementById("countdownWrapper"),
     countdownElement: document.getElementById("countdown"),
     resetButton: document.getElementById("resetButton"),
-    devResetButton: document.getElementById("devResetButton"),
-    devResetAttemptsButton: document.getElementById("devResetAttemptsButton"),
     helpModal: document.getElementById("helpModal"),
     helpButton: document.getElementById("helpButton"),
     closeHelpButton: document.getElementById("closeHelpButton"),
@@ -153,7 +151,7 @@ function startMode(modeId) {
 
     if (modeId === "daily") {
         ui.setModeTitle("SENHA · Diário");
-        ui.configureMeta({ showDevReset: true });
+        ui.configureMeta({});
         activeMode = new DailyMode({ wordList, engine, ui });
     } else if (modeId === "battle-royale") {
         ui.setModeTitle("SENHA · Battle Royale");
@@ -226,18 +224,6 @@ async function initialize() {
 
     refs.tamperCloseButton.addEventListener("click", () => ui.hideTamperAlert());
 
-    refs.resetButton.addEventListener("click", () => activeMode?.restart());
-        refs.devResetButton.addEventListener("click", () => {
-        if (activeMode instanceof DailyMode) {
-            activeMode.devSkipWord();
-        }
-    });
-    refs.devResetAttemptsButton.addEventListener("click", () => {
-        if (activeMode instanceof DailyMode) {
-            activeMode.devResetAttempts();
-        }
-    });
-
     refs.helpButton.addEventListener("click", openHelp);
     refs.closeHelpButton.addEventListener("click", closeHelp);
     refs.helpModal.addEventListener("click", event => {
@@ -247,6 +233,8 @@ async function initialize() {
     });
 
     document.addEventListener("keydown", handlePhysicalKeyboard);
+
+    window.__senha = { getActiveMode: () => activeMode };
 
     updateCountdown();
     setInterval(updateCountdown, 1000);

@@ -72,22 +72,3 @@ export function getDailyWord(words, epoch, dayOffset = 0) {
 
     return words[Math.abs(today) % words.length];
 }
-
-export function getNextDistinctWord(words, currentWord) {
-    const currentIndex = words.indexOf(currentWord);
-
-    if (currentIndex === -1) {
-        return currentWord;
-    }
-
-    let index = (currentIndex + 1) % words.length;
-
-    while (
-        words[index] === currentWord ||
-        words[index][0] === currentWord[0]
-    ) {
-        index = (index + 1) % words.length;
-    }
-
-    return words[index];
-}

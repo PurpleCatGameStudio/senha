@@ -12,6 +12,7 @@ export class BattleRoyaleMode {
         this.solvedCount = 0;
         this.timerId = null;
         this.finished = false;
+        this.usedWords = new Set();
     }
 
     getRecord() {
@@ -29,6 +30,7 @@ export class BattleRoyaleMode {
         this.secondsRemaining = this.durationSeconds;
         this.solvedCount = 0;
         this.finished = false;
+        this.usedWords = new Set();
 
         this.ui.hideResult();
         this.ui.showMessage("");
@@ -53,7 +55,8 @@ export class BattleRoyaleMode {
     }
 
     nextWord() {
-        const target = pickRandomWord(this.wordList, this.engine.target || null);
+        const target = pickRandomWord(this.wordList, this.usedWords);
+        this.usedWords.add(target);
         this.engine.startWord(target);
     }
 

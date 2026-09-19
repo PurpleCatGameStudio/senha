@@ -1,6 +1,6 @@
 import { CONFIG } from "../config.js";
 import { readJSON, writeJSON, removeKey } from "../storage.js";
-import { getDayIndex, getDailyWord, getNextDistinctWord } from "../wordBank.js";
+import { getDayIndex, getDailyWord } from "../wordBank.js";
 import { evaluateGuess } from "../evaluation.js";
 import { computeDailySignature, verifyDailySignature } from "../integrity.js";
 
@@ -85,16 +85,6 @@ export class DailyMode {
             extraLine: null,
             showCountdown: true
         });
-    }
-
-    devSkipWord() {
-        const nextWord = getNextDistinctWord(this.wordList, this.engine.target);
-
-        removeKey(CONFIG.storageKeys.daily);
-        this.engine.startWord(nextWord);
-        this.persist(false);
-        this.ui.hideResult();
-        this.ui.showMessage("");
     }
 
     devResetAttempts() {

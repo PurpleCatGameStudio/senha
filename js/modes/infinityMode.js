@@ -9,6 +9,7 @@ export class InfinityMode {
         this.ui = ui;
         this.attemptPool = CONFIG.maxAttempts;
         this.streak = 0;
+        this.usedWords = new Set();
     }
 
     getRecord() {
@@ -22,6 +23,7 @@ export class InfinityMode {
 
     start() {
         this.streak = 0;
+        this.usedWords = new Set();
 
         this.ui.hideResult();
         this.ui.showMessage("");
@@ -38,7 +40,8 @@ export class InfinityMode {
     stop() {}
 
     nextWord() {
-        const target = pickRandomWord(this.wordList, this.engine.target || null);
+        const target = pickRandomWord(this.wordList, this.usedWords);
+        this.usedWords.add(target);
         this.engine.startWord(target);
     }
 

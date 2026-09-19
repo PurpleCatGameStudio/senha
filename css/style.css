@@ -525,6 +525,57 @@ button {
     background: var(--absent);
 }
 
+.maintenance-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(10, 10, 11, 0.60);
+}
+
+.maintenance-message {
+    width: min(520px, 100%);
+    padding: 32px 28px;
+    text-align: center;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+}
+
+.maintenance-message h2 {
+    margin: 0 0 16px;
+    font-size: clamp(28px, 6vw, 42px);
+    line-height: 1.05;
+    font-weight: 800;
+    letter-spacing: 3px;
+    background: linear-gradient(120deg, var(--accent), var(--correct));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.maintenance-message p {
+    margin: 0;
+    color: var(--foreground);
+    font-size: clamp(14px, 2.5vw, 17px);
+    line-height: 1.5;
+}
+
+.maintenance-return {
+    position: fixed;
+    bottom: 45px;
+    left: 24px;
+    right: 24px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 18px;
+    letter-spacing: 0.5px;
+}
+
 @media (max-width: 420px) {
     .game {
         padding-left: 10px;

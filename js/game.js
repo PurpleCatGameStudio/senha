@@ -2,7 +2,7 @@ const CONFIG = Object.freeze({
     wordLength: 5,
     maxAttempts: 6,
     storageKey: "senha-game-state",
-    epoch: new Date(2026, 0, 1).getTime()
+    epoch: new Date(2026, 0, 1).getTime(),
     wordListPath: "./data/words.txt"
 });
 

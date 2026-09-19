@@ -14,6 +14,8 @@ const MAINTENANCE_MODE = false;
 const refs = {
     modeSelectScreen: document.getElementById("modeSelectScreen"),
     maintenanceOverlay: document.getElementById("maintenanceOverlay"),
+    tamperOverlay: document.getElementById("tamperOverlay"),
+    tamperCloseButton: document.getElementById("tamperCloseButton"),
     gameScreen: document.getElementById("gameScreen"),
     dailyModeStatus: document.getElementById("dailyModeStatus"),
     battleRoyaleModeStatus: document.getElementById("battleRoyaleModeStatus"),
@@ -35,6 +37,7 @@ const refs = {
     countdownElement: document.getElementById("countdown"),
     resetButton: document.getElementById("resetButton"),
     devResetButton: document.getElementById("devResetButton"),
+    devResetAttemptsButton: document.getElementById("devResetAttemptsButton"),
     helpModal: document.getElementById("helpModal"),
     helpButton: document.getElementById("helpButton"),
     closeHelpButton: document.getElementById("closeHelpButton"),
@@ -221,10 +224,17 @@ async function initialize() {
     refs.backToModesButton.addEventListener("click", returnToModeSelect);
     refs.backToModesFromStats.addEventListener("click", returnToModeSelect);
 
+    refs.tamperCloseButton.addEventListener("click", () => ui.hideTamperAlert());
+
     refs.resetButton.addEventListener("click", () => activeMode?.restart());
-    refs.devResetButton.addEventListener("click", () => {
+        refs.devResetButton.addEventListener("click", () => {
         if (activeMode instanceof DailyMode) {
             activeMode.devSkipWord();
+        }
+    });
+    refs.devResetAttemptsButton.addEventListener("click", () => {
+        if (activeMode instanceof DailyMode) {
+            activeMode.devResetAttempts();
         }
     });
 

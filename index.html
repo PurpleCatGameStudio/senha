@@ -1,20 +1,35 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Senha - um jogo diário de palavras de cinco letras, com modos Battle Royale e Infinity.">
+    <meta name="description"
+        content="Senha - um jogo diário de palavras de cinco letras, com modos Battle Royale e Infinity.">
     <title>Senha</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body>
     <div id="maintenanceOverlay" class="maintenance-overlay hidden">
         <div class="maintenance-message">
             <h2>ALGUÉM TROCOU OS FIOS</h2>
             <p>
-                Estamos tentando descobrir qual é o certo antes que tudo vá pelos ares. Enquanto isso, estamos aproveitando para deixar o Senha ainda melhor.
+                Estamos tentando descobrir qual é o certo antes que tudo vá pelos ares. Enquanto isso, estamos
+                aproveitando para deixar o Senha ainda melhor.
             </p>
             <span class="maintenance-return">Volte mais tarde para conferir.</span>
+        </div>
+    </div>
+
+    <div id="tamperOverlay" class="maintenance-overlay tamper-overlay hidden">
+        <div class="maintenance-message tamper-message">
+            <h2 class="tamper-title">TE PEGUEI</h2>
+            <p>
+                Alguém andou mexendo nos fios por aqui. E eu vi quem foi!<br>
+                Vergonha pra tu. Vergonha pra tua família.
+            </p>
+            <button id="tamperCloseButton" class="secondary-button tamper-close-button" type="button">Entendido</button>
         </div>
     </div>
 
@@ -96,22 +111,13 @@
         </section>
 
         <button id="devResetButton" class="dev-reset-button hidden" type="button">DEV: Nova palavra</button>
+        <button id="devResetAttemptsButton" class="dev-reset-button hidden" type="button">DEV: Resetar
+            tentativas</button>
     </main>
 
-    <div
-        id="helpModal"
-        class="modal hidden"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="helpTitle"
-    >
+    <div id="helpModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
         <div class="modal-content">
-            <button
-                id="closeHelpButton"
-                class="close-button"
-                type="button"
-                aria-label="Fechar"
-            >
+            <button id="closeHelpButton" class="close-button" type="button" aria-label="Fechar">
                 ×
             </button>
 
@@ -142,4 +148,5 @@
 
     <script type="module" src="./js/main.js"></script>
 </body>
+
 </html>

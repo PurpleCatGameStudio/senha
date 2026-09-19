@@ -7,12 +7,13 @@ export class UIController {
         this.refs.modeTitle.textContent = title;
     }
 
-    configureMeta({ showTimer = false, showScore = false, showStreak = false, showRecord = false, showDevReset = false }) {
+        configureMeta({ showTimer = false, showScore = false, showStreak = false, showRecord = false, showDevReset = false }) {
         this.refs.timerMetaItem.classList.toggle("hidden", !showTimer);
         this.refs.scoreMetaItem.classList.toggle("hidden", !showScore);
         this.refs.streakMetaItem.classList.toggle("hidden", !showStreak);
         this.refs.recordMetaItem.classList.toggle("hidden", !showRecord);
         this.refs.devResetButton.classList.toggle("hidden", !showDevReset);
+        this.refs.devResetAttemptsButton.classList.toggle("hidden", !showDevReset);
     }
 
     updateTimer(totalSeconds) {
@@ -64,5 +65,13 @@ export class UIController {
 
     updateCountdown(text) {
         this.refs.countdownElement.textContent = text;
+    }
+
+    showTamperAlert() {
+        this.refs.tamperOverlay.classList.remove("hidden");
+    }
+
+    hideTamperAlert() {
+        this.refs.tamperOverlay.classList.add("hidden");
     }
 }

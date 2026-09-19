@@ -608,3 +608,18 @@ button {
         font-size: 32px;
     }
 }
+
+.tamper-overlay {
+    z-index: 10000;
+}
+
+.tamper-title {
+    background: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+    color: var(--danger);
+}
+
+.tamper-close-button {
+    margin-top: 20px;
+}

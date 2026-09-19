@@ -9,8 +9,11 @@ import { DailyMode } from "./modes/dailyMode.js";
 import { BattleRoyaleMode } from "./modes/battleRoyaleMode.js";
 import { InfinityMode } from "./modes/infinityMode.js";
 
+const MAINTENANCE_MODE = true;
+
 const refs = {
     modeSelectScreen: document.getElementById("modeSelectScreen"),
+    maintenanceOverlay: document.getElementById("maintenanceOverlay"),
     gameScreen: document.getElementById("gameScreen"),
     dailyModeStatus: document.getElementById("dailyModeStatus"),
     battleRoyaleModeStatus: document.getElementById("battleRoyaleModeStatus"),
@@ -45,7 +48,9 @@ const refs = {
     recordValue: document.getElementById("recordValue")
 };
 
-const requiredRefs = Object.values(refs);
+const requiredRefs = Object.entries(refs)
+    .filter(([key]) => key !== "maintenanceOverlay")
+    .map(([, ref]) => ref);
 
 if (requiredRefs.some(ref => !ref)) {
     console.error("Required HTML elements were not found.");
@@ -183,6 +188,11 @@ function closeHelp() {
 }
 
 async function initialize() {
+    refs.maintenanceOverlay.classList.toggle(
+        "hidden",
+        !MAINTENANCE_MODE
+    );
+
     try {
         wordList = await loadWordList(CONFIG.wordListPath, CONFIG.wordLength);
         wordSet = new Set(wordList);

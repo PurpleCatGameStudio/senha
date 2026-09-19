@@ -9,7 +9,7 @@ import { DailyMode } from "./modes/dailyMode.js";
 import { BattleRoyaleMode } from "./modes/battleRoyaleMode.js";
 import { InfinityMode } from "./modes/infinityMode.js";
 
-const MAINTENANCE_MODE = true;
+const MAINTENANCE_MODE = false;
 
 const refs = {
     modeSelectScreen: document.getElementById("modeSelectScreen"),
@@ -26,7 +26,7 @@ const refs = {
     modeTitle: document.getElementById("modeTitle"),
     board: document.getElementById("board"),
     keyboard: document.getElementById("keyboard"),
-    message: document.getElementById("message"),
+    messageElement: document.getElementById("message"),
     statsElement: document.getElementById("stats"),
     resultTitleElement: document.getElementById("resultTitle"),
     answerElement: document.getElementById("answer"),
@@ -134,7 +134,7 @@ function createEngine() {
         boardView,
         keyboardView,
         wordSet,
-        messageElement: refs.message,
+        messageElement: refs.messageElement,
         wordLength: CONFIG.wordLength,
         maxAttempts: CONFIG.maxAttempts
     });
@@ -194,8 +194,13 @@ async function initialize() {
     );
 
     try {
-        wordList = await loadWordList(CONFIG.wordListPath, CONFIG.wordLength);
-        wordSet = new Set(wordList);
+        const [loadedWordList, loadedLexicon] = await Promise.all([
+            loadWordList(CONFIG.wordListPath, CONFIG.wordLength),
+            loadWordList(CONFIG.lexiconPath, CONFIG.wordLength)
+        ]);
+
+        wordList = loadedWordList;
+        wordSet = new Set([...loadedWordList, ...loadedLexicon]);
     } catch (error) {
         console.error("Failed to load word list:", error);
         refs.dailyModeStatus.textContent = "Erro ao carregar palavras.";

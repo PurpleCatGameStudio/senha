@@ -3,6 +3,7 @@ export const CONFIG = Object.freeze({
     maxAttempts: 6,
     epoch: new Date(2026, 0, 1).getTime(),
     wordListPath: "./data/words.txt",
+    lexiconPath: "./data/lexicon.txt",
     battleRoyaleDurationSeconds: 600,
     storageKeys: Object.freeze({
         daily: "senha-daily-state",

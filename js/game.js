@@ -2,7 +2,7 @@ const CONFIG = Object.freeze({
     wordLength: 5,
     maxAttempts: 6,
     storageKey: "senha-game-state",
-    epoch: Date.UTC(2026, 0, 1),
+    epoch: new Date(2026, 0, 1).getTime()
     wordListPath: "./data/words.txt"
 });
 
@@ -33,6 +33,7 @@ const countdownElement = document.getElementById("countdown");
 const helpModalElement = document.getElementById("helpModal");
 const helpButtonElement = document.getElementById("helpButton");
 const closeHelpButtonElement = document.getElementById("closeHelpButton");
+const devResetButtonElement = document.getElementById("devResetButton");
 
 function normalizeWord(value) {
     return value
@@ -73,18 +74,35 @@ async function loadWords() {
 
 function getDayIndex() {
     const now = new Date();
-    const utcToday = Date.UTC(
-        now.getUTCFullYear(),
-        now.getUTCMonth(),
-        now.getUTCDate()
+    const localToday = new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        now.getDate()
     );
 
-    return Math.floor((utcToday - CONFIG.epoch) / 86400000);
+    return Math.floor((localToday.getTime() - CONFIG.epoch) / 86400000);
 }
 
 function getDailyWord() {
-    const index = Math.abs(getDayIndex()) % WORDS.length;
-    return WORDS[index];
+    const today = getDayIndex();
+    let index = Math.abs(today) % WORDS.length;
+    const previousIndex = Math.abs(today - 1) % WORDS.length;
+    const previousWord = WORDS[previousIndex];
+
+    for (let attempts = 0; attempts < WORDS.length; attempts++) {
+        const word = WORDS[index];
+
+        if (
+            word !== previousWord &&
+            word[0] !== previousWord[0]
+        ) {
+            return word;
+        }
+
+        index = (index + 1) % WORDS.length;
+    }
+
+    return WORDS[Math.abs(today) % WORDS.length];
 }
 
 function loadState() {
@@ -381,6 +399,11 @@ function resetGame() {
     showMessage("");
 }
 
+function devResetDay() {
+    localStorage.removeItem(CONFIG.storageKey);
+    window.location.reload();
+}
+
 function updateCountdown() {
     if (!gameState.gameOver) {
         statsElement.classList.add("hidden");
@@ -468,6 +491,8 @@ helpButtonElement.addEventListener("click", openHelp);
 closeHelpButtonElement.addEventListener("click", closeHelp);
 
 resetButtonElement.addEventListener("click", resetGame);
+
+devResetButtonElement.addEventListener("click", devResetDay);
 
 helpModalElement.addEventListener("click", event => {
     if (event.target === helpModalElement) {

@@ -3,16 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Senha - um jogo diário de palavras de cinco letras.">
+    <meta name="description" content="Senha - um jogo diário de palavras de cinco letras, com modos Battle Royale e Infinity.">
     <title>Senha</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <main class="game">
-        <header class="header">
+    <div id="modeSelectScreen" class="mode-select">
+        <header class="mode-select-header">
             <h1>SENHA</h1>
+            <p class="mode-select-subtitle">Escolha um modo de jogo</p>
+        </header>
+
+        <div class="mode-cards">
+            <button id="selectDailyMode" class="mode-card" type="button">
+                <span class="mode-card-title">Diário</span>
+                <span class="mode-card-description">Uma palavra por dia. 6 tentativas.</span>
+                <span id="dailyModeStatus" class="mode-card-stat">Carregando...</span>
+            </button>
+
+            <button id="selectBattleRoyaleMode" class="mode-card" type="button">
+                <span class="mode-card-title">Battle Royale</span>
+                <span class="mode-card-description">10 minutos. Acerte o máximo de palavras.</span>
+                <span id="battleRoyaleModeStatus" class="mode-card-stat">Carregando...</span>
+            </button>
+
+            <button id="selectInfinityMode" class="mode-card" type="button">
+                <span class="mode-card-title">Infinity</span>
+                <span class="mode-card-description">Sem cronômetro. Mantenha a sequência.</span>
+                <span id="infinityModeStatus" class="mode-card-stat">Carregando...</span>
+            </button>
+        </div>
+    </div>
+
+    <main id="gameScreen" class="game hidden">
+        <header class="header">
+            <button id="backToModesButton" class="icon-button" type="button" aria-label="Voltar aos modos">←</button>
+            <h1 id="modeTitle">SENHA</h1>
             <button id="helpButton" class="icon-button" type="button" aria-label="Como jogar">?</button>
         </header>
+
+        <section id="metaBar" class="meta-bar">
+            <div id="timerMetaItem" class="meta-item hidden">
+                <span class="meta-label">Tempo</span>
+                <strong id="timerValue" class="meta-value">10:00</strong>
+            </div>
+            <div id="scoreMetaItem" class="meta-item hidden">
+                <span class="meta-label">Palavras</span>
+                <strong id="scoreValue" class="meta-value">0</strong>
+            </div>
+            <div id="streakMetaItem" class="meta-item hidden">
+                <span class="meta-label">Sequência</span>
+                <strong id="streakValue" class="meta-value">0</strong>
+            </div>
+            <div id="recordMetaItem" class="meta-item hidden">
+                <span class="meta-label">Recorde</span>
+                <strong id="recordValue" class="meta-value">0</strong>
+            </div>
+        </section>
 
         <section id="board" class="board" aria-label="Tabuleiro"></section>
 
@@ -21,25 +68,24 @@
         <section id="keyboard" class="keyboard" aria-label="Teclado virtual"></section>
 
         <section id="stats" class="stats hidden">
-        <div>
-            <strong id="resultTitle">Você venceu!</strong>
-            <span id="answer"></span>
-        </div>
-    
-        <div class="next-game">
-            <span>Próximo jogo</span>
-            <strong id="countdown">00:00:00</strong>
-        </div>
-    
-        <button id="resetButton" class="reset-button" type="button">
-            Resetar jogo
-        </button>
-    </section>
+            <div class="stats-summary">
+                <strong id="resultTitle">Você venceu!</strong>
+                <span id="answer"></span>
+                <span id="extraLine" class="extra-line hidden"></span>
+            </div>
 
-    <button id="devResetButton" class="dev-reset-button" type="button">
-    DEV: Nova palavra
-    </button>
-        
+            <div id="countdownWrapper" class="next-game hidden">
+                <span>Próximo jogo</span>
+                <strong id="countdown">00:00:00</strong>
+            </div>
+
+            <div class="stats-actions">
+                <button id="resetButton" class="reset-button" type="button">Jogar novamente</button>
+                <button id="backToModesFromStats" class="secondary-button" type="button">Voltar aos modos</button>
+            </div>
+        </section>
+
+        <button id="devResetButton" class="dev-reset-button hidden" type="button">DEV: Nova palavra</button>
     </main>
 
     <div
@@ -77,10 +123,13 @@
                 <div class="example-tile absent">X</div>
                 <p>A letra não está na palavra.</p>
             </div>
+
+            <p><strong>Diário</strong>: uma palavra por dia, 6 tentativas.</p>
+            <p><strong>Battle Royale</strong>: 10 minutos para acertar o máximo de palavras possível.</p>
+            <p><strong>Infinity</strong>: mantenha a sequência; cada erro consome uma tentativa, cada acerto renova.</p>
         </div>
     </div>
 
-    <script src="./js/game.js"></script>
+    <script type="module" src="./js/main.js"></script>
 </body>
 </html>
-```

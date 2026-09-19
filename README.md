@@ -1,31 +1,15 @@
 # Senha
 
-Jogo diário de palavras onde você deve descobrir a senha. feito com HTML, CSS e JavaScript puro.
+**Senha** é um jogo de palavras de cinco letras desenvolvido com HTML, CSS e JavaScript puro.
 
-## Rodando localmente
+O jogo possui três modos:
 
-Abra `index.html` em um navegador.
+* **Diário** — uma palavra por dia com até 6 tentativas.
+* **Battle Royale** — 10 minutos para acertar o máximo de palavras possível.
+* **Infinity** — continue acertando palavras enquanto ainda tiver tentativas.
 
-Para desenvolvimento, também é possível usar qualquer servidor HTTP local.
+## Armazenamento
 
-## GitHub Pages
+O jogo utiliza `localStorage` para armazenar o progresso diário e os recordes dos modos de jogo.
 
-1. Crie um repositório chamado `plavra` no GitHub.
-2. Envie `index.html`, `style.css`, `script.js`, `words.js` e `README.md` para a raiz do repositório.
-3. Abra **Settings > Pages**.
-4. Em **Build and deployment**, selecione **Deploy from a branch**.
-5. Selecione a branch `main` e a pasta `/ (root)`.
-6. Salve e aguarde o GitHub Pages publicar o site.
-
-## Estrutura
-
-- `index.html`: estrutura da página e modal de instruções.
-- `style.css`: interface responsiva.
-- `script.js`: regras, estado, teclado, tentativas e palavra diária.
-- `words.js`: banco de palavras válidas e palavras utilizadas pelo jogo.
-
-## Estado do jogo
-
-O progresso do dia é salvo no `localStorage` do navegador. Cada dia possui uma palavra determinada pelo índice do dia desde 1º de janeiro de 2026.
-
-O jogo não possui backend, banco de dados ou dependências externas.
+O projeto é totalmente client-side e não possui backend ou banco de dados.

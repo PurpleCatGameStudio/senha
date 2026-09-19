@@ -83,8 +83,8 @@ function getDayIndex() {
     return Math.floor((localToday.getTime() - CONFIG.epoch) / 86400000);
 }
 
-function getDailyWord() {
-    const today = getDayIndex();
+function getDailyWord(dayOffset = 0) {
+    const today = getDayIndex() + dayOffset;
     let index = Math.abs(today) % WORDS.length;
     const previousIndex = Math.abs(today - 1) % WORDS.length;
     const previousWord = WORDS[previousIndex];
@@ -105,6 +105,15 @@ function getDailyWord() {
     return WORDS[Math.abs(today) % WORDS.length];
 }
 
+function devResetDay() {
+    const devDayOffset = Number(localStorage.getItem("senha-dev-day-offset") || 0) + 1;
+
+    localStorage.setItem("senha-dev-day-offset", devDayOffset);
+    localStorage.removeItem(CONFIG.storageKey);
+
+    window.location.reload();
+}
+
 function loadState() {
     const todayKey = getDayIndex().toString();
 
@@ -112,7 +121,8 @@ function loadState() {
         const saved = JSON.parse(localStorage.getItem(CONFIG.storageKey));
 
         if (!saved || saved.day !== todayKey) {
-            gameState.target = getDailyWord();
+            const devDayOffset = Number(localStorage.getItem("senha-dev-day-offset") || 0);
+            gameState.target = getDailyWord(devDayOffset);
             gameState.guesses = [];
             gameState.currentGuess = "";
             gameState.gameOver = false;
@@ -451,7 +461,8 @@ async function initialize() {
         !countdownElement ||
         !helpModalElement ||
         !helpButtonElement ||
-        !closeHelpButtonElement
+        !closeHelpButtonElement ||
+        !devResetButtonElement
     ) {
         console.error("Required HTML elements were not found.");
         return;

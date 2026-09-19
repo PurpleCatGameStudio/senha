@@ -305,3 +305,12 @@ button {
     border-radius: 6px;
     cursor: pointer;
 }
+
+.dev-reset-button {
+    margin-top: 16px;
+    padding: 8px 12px;
+    border: 1px solid #888;
+    border-radius: 6px;
+    background: transparent;
+    cursor: pointer;
+}

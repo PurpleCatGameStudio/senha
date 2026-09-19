@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Senha - um jogo diário de palavras de cinco letras, com modos Battle Royale e Infinity.">
+        content="Senha - um jogo diário de palavras de cinco letras, com modos Battle Royale e Infinito.">
     <title>Senha</title>
     <link rel="stylesheet" href="./css/style.css">
 </head>
@@ -46,16 +46,16 @@
                 <span id="dailyModeStatus" class="mode-card-stat">Carregando...</span>
             </button>
 
+            <button id="selectInfinityMode" class="mode-card" type="button">
+                <span class="mode-card-title">Biblioteca de Babel</span>
+                <span class="mode-card-description">Sem cronômetro. Mantenha a sequência.</span>
+                <span id="infinityModeStatus" class="mode-card-stat">Carregando...</span>
+            </button>
+
             <button id="selectBattleRoyaleMode" class="mode-card" type="button">
                 <span class="mode-card-title">Battle Royale</span>
                 <span class="mode-card-description">10 minutos. Acerte o máximo de palavras.</span>
                 <span id="battleRoyaleModeStatus" class="mode-card-stat">Carregando...</span>
-            </button>
-
-            <button id="selectInfinityMode" class="mode-card" type="button">
-                <span class="mode-card-title">Infinity</span>
-                <span class="mode-card-description">Sem cronômetro. Mantenha a sequência.</span>
-                <span id="infinityModeStatus" class="mode-card-stat">Carregando...</span>
             </button>
         </div>
     </div>
@@ -109,7 +109,7 @@
                 <button id="backToModesFromStats" class="secondary-button" type="button">Voltar aos modos</button>
             </div>
         </section>
-        
+
     </main>
 
     <div id="helpModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="helpTitle">
@@ -137,9 +137,9 @@
                 <p>A letra não está na palavra.</p>
             </div>
 
-            <p><strong>Diário</strong>: uma palavra por dia, 6 tentativas.</p>
+            <p><strong>Diário</strong>: uma palavra por dia, 6 tentativas.</p>            
+            <p><strong>Biblioteca de Babel</strong>: mantenha a sequência; cada erro consome uma tentativa, cada acerto renova.</p>
             <p><strong>Battle Royale</strong>: 10 minutos para acertar o máximo de palavras possível.</p>
-            <p><strong>Infinity</strong>: mantenha a sequência; cada erro consome uma tentativa, cada acerto renova.</p>
         </div>
     </div>
 
